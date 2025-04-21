@@ -1,5 +1,5 @@
 # EX01 Developing a Simple Webserver
-## Date:
+## Date: 21/04/2025
 
 ## AIM:
 To develop a simple webserver to serve html pages and display the list of protocols in TCP/IP Protocol Suite.
@@ -36,9 +36,43 @@ Start the server script and check for errors.
 Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
+```
+from http.server import HTTPServer,BaseHTTPRequestHandler
 
+content="""
+<!doctype html>
+<html>
+<head>
+<title> My Web Server</title>
+</head>
+<body>
+<center><h1>TCP/IP PROTOCOLS</h1><br>
+</center>
+<h3>
+1. Application Layer Protocols - HTTP,FTP,DNS<br>
+2. Transport Layer Protocols - TCP/UDP<br>
+3. Internet Layer Protocols - IPV4/IPV6<br>
+4. Link Layer Protocols - MAC<br>
+</body>
+</html>
+"""
 
+class MyServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Get request received...")
+        self.send_response(200) 
+        self.send_header("content-type", "text/html")       
+        self.end_headers()
+        self.wfile.write(content.encode())
+
+print("my webserver is running") 
+server_address =('',8000)
+httpd = HTTPServer(server_address,MyServer)
+httpd.serve_forever()
+```
 ## OUTPUT:
+![image](https://github.com/user-attachments/assets/fe5eb22b-c1dd-430c-a337-2086b012e284)
+![image](https://github.com/user-attachments/assets/3af1d303-028c-4dd9-a3f9-74e1fbadbf2b)
 
 
 ## RESULT:
